@@ -5,8 +5,8 @@
             <h1 class="display-3 text-white mb-3 animated slideInDown">{{__('front.content.services.main_title')}}</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb justify-content-center text-uppercase">
-                    <li class="breadcrumb-item"><a href="#">{{__('front.content.services.home')}}</a></li>
-                    <li class="breadcrumb-item"><a href="#">{{__('front.content.services.about')}}</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('front.content.services.home')}}</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('about')}}">{{__('front.content.services.about')}}</a></li>
                     <li class="breadcrumb-item text-white active" aria-current="page">{{__('front.content.services.services')}}</li>
                 </ol>
             </nav>

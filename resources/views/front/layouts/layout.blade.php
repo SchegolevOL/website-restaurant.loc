@@ -35,6 +35,7 @@
 </head>
 
 <body>
+@dump(app()->getLocale())
 <div class="container-xxl bg-white p-0">
     @include('front.layouts.parts.header')
 

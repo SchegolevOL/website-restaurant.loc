@@ -19,22 +19,27 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::prefix(\App\Helpers\Langs::getLocale())->middleware('langs')->group(function () {
+    Route::get('/', [\App\Http\Controllers\front\FrontController::class, 'home'])->name('home');
+    Route::get('/booking', [\App\Http\Controllers\front\FrontController::class, 'booking'])->name('booking');
+    Route::get('/about', [\App\Http\Controllers\front\FrontController::class, 'about'])->name('about');
+    Route::get('/contact', [\App\Http\Controllers\front\FrontController::class, 'contact'])->name('contact');
+    Route::get('/menu', [\App\Http\Controllers\front\FrontController::class, 'menu'])->name('menu');
+    Route::get('/service', [\App\Http\Controllers\front\FrontController::class, 'service'])->name('service');
+    Route::get('/team', [\App\Http\Controllers\front\FrontController::class, 'team'])->name('team');
+    Route::get('/testimonial', [\App\Http\Controllers\front\FrontController::class, 'testimonial'])->name('testimonial');
+    Route::get('/register', [\App\Http\Controllers\user\UserController::class, 'create'])->name('register.create');
+    Route::get('/login', [\App\Http\Controllers\user\UserController::class, 'loginForm'])->name('register.loginForm');
+    Route::post('/register', [\App\Http\Controllers\user\UserController::class, 'store'])->name('register.store');
+    Route::post('/login', [\App\Http\Controllers\user\UserController::class, 'login'])->name('login');
+    Route::get('/logout', [\App\Http\Controllers\user\UserController::class, 'logout'])->name('register.logout');
+    Route::post('/booking', [\App\Http\Controllers\front\FrontController::class, 'store'])->name('store');
+    Route::get('/profile', [\App\Http\Controllers\front\FrontController::class, 'profile'])->name('profile');
+});
 
-Route::get('/', [\App\Http\Controllers\front\FrontController::class, 'home'])->name('home');
-Route::get('/booking', [\App\Http\Controllers\front\FrontController::class, 'booking'])->name('booking');
-Route::get('/about', [\App\Http\Controllers\front\FrontController::class, 'about'])->name('about');
-Route::get('/contact', [\App\Http\Controllers\front\FrontController::class, 'contact'])->name('contact');
-Route::get('/menu', [\App\Http\Controllers\front\FrontController::class, 'menu'])->name('menu');
-Route::get('/service', [\App\Http\Controllers\front\FrontController::class, 'service'])->name('service');
-Route::get('/team', [\App\Http\Controllers\front\FrontController::class, 'team'])->name('team');
-Route::get('/testimonial', [\App\Http\Controllers\front\FrontController::class, 'testimonial'])->name('testimonial');
-Route::get('/register', [\App\Http\Controllers\user\UserController::class, 'create'])->name('register.create');
-Route::get('/login', [\App\Http\Controllers\user\UserController::class, 'loginForm'])->name('register.loginForm');
-Route::post('/register', [\App\Http\Controllers\user\UserController::class, 'store'])->name('register.store');
-Route::post('/login', [\App\Http\Controllers\user\UserController::class, 'login'])->name('login');
-Route::get('/logout', [\App\Http\Controllers\user\UserController::class, 'logout'])->name('register.logout');
-Route::post('/booking', [\App\Http\Controllers\front\FrontController::class, 'store'])->name('store');
-Route::get('/profile', [\App\Http\Controllers\front\FrontController::class, 'profile'])->name('profile');
+
+
+
 
 
 Route::prefix('admin')->group(function (){

@@ -1,3 +1,4 @@
+
 <!-- Navbar & Hero Start -->
 <div class="container-xxl position-relative p-0">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
@@ -10,11 +11,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0 pe-4">
-                <a href="{{route('home')}}" class="nav-item nav-link @php if($title=='home')echo'active' @endphp">{{__('front.header.home')}}</a>
-                <a href="{{route('about')}}" class="nav-item nav-link @php if($title=='about')echo'active' @endphp">{{__('front.header.about')}}</a>
+                <a href="{{route('home')}}"
+                   class="nav-item nav-link @php if($title=='home')echo'active' @endphp">{{__('front.header.home')}}</a>
+                <a href="{{route('about')}}"
+                   class="nav-item nav-link @php if($title=='about')echo'active' @endphp">{{__('front.header.about')}}</a>
                 <a href="{{route('service')}}"
                    class="nav-item nav-link @php if($title=='service')echo'active' @endphp">{{__('front.header.services')}}</a>
-                <a href="{{route('menu')}}" class="nav-item nav-link @php if($title=='menu')echo'active' @endphp">{{__('front.header.menu')}}</a>
+                <a href="{{route('menu')}}"
+                   class="nav-item nav-link @php if($title=='menu')echo'active' @endphp">{{__('front.header.menu')}}</a>
                 <div class="nav-item dropdown">
                     <a href="#"
                        class="nav-link dropdown-toggle @php if($title=='team'||$title=='booking'||$title=='testimonial')echo'active' @endphp"
@@ -29,10 +33,19 @@
                    class="nav-item nav-link @php if($title=='contact')echo'active' @endphp">{{__('front.header.contact')}}</a>
 
                 @guest()
-                    <a href="{{route('register.create')}}"
-                       class="nav-item nav-link @php if($title=='register')echo'active' @endphp">{{__('front.header.register')}}</a>
-                    <a href="{{route('register.loginForm')}}"
-                       class="nav-item nav-link @php if($title=='login')echo'active' @endphp">{{__('front.header.login')}}</a>
+
+                    <div class="nav-item dropdown">
+                        <a href="#"
+                           class="nav-link dropdown-toggle "
+                           data-bs-toggle="dropdown">{{__('front.header.log')}}</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="{{route('register.create')}}" class="dropdown-item">{{__('front.header.register')}}</a>
+                            <a href="{{route('register.loginForm')}}" class="dropdown-item">{{__('front.header.login')}}</a>
+
+                        </div>
+                    </div>
+
+
                 @endguest
                 @auth()
                     <div class="nav-item dropdown">
@@ -41,9 +54,11 @@
                         <div class="dropdown-menu m-0">
                             <a href="{{route('profile')}}" class="dropdown-item">{{__('front.header.profile')}}</a>
                             @if(auth()->user()->is_admin)
-                                <a href="{{route('chiefs.index')}}" class="dropdown-item">{{__('front.header.panel')}}</a>
+                                <a href="{{route('chiefs.index')}}"
+                                   class="dropdown-item">{{__('front.header.panel')}}</a>
                             @endif
-                            <a href="{{route('register.logout')}}" class="dropdown-item">{{__('front.header.logout')}}</a>
+                            <a href="{{route('register.logout')}}"
+                               class="dropdown-item">{{__('front.header.logout')}}</a>
 
                         </div>
                     </div>
@@ -53,24 +68,24 @@
 
 
 
+
             <div class="nav-item dropdown">
                 <a href="#"
-                   class="nav-link dropdown-toggle"
-                   data-bs-toggle="dropdown">{{__('front.header.language')}}</a>
+                   class="nav-link dropdown-toggle "
+                   data-bs-toggle="dropdown">{{__(app()->getLocale())}}</a>
                 <div class="dropdown-menu m-0">
-                    <a href="{{route('booking')}}" class="dropdown-item">ru</a>
-                    <a href="{{route('team')}}" class="dropdown-item">en</a>
-                    <a href="{{route('testimonial')}}" class="dropdown-item">fr</a>
+                    <a href="{{route('setLocale', 'ru')}}" class="dropdown-item">ru</a>
+                    <a href="{{route('setLocale', 'en')}}" class="dropdown-item">en</a>
+
                 </div>
             </div>
 
+            <a href="" class="btn btn-primary py-2 px-4">{{__('front.header.button')}}</a>
 
-
-
-
-            <a href="" class="btn btn-primary py-2 px-4">Book A Table</a>
 
         </div>
+
+
     </nav>
     @yield('nav-bar-content')
 

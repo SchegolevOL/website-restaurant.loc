@@ -1,24 +1,24 @@
 <?php
 return [
     'header' => [
-        'title' => 'Restaurant',
-        'home' => 'Home',
-        'about' => 'About',
-        'contact' => 'Contact',
-        'login' => 'Login',
-        'register' => 'Register',
-        'logout' => 'Logout',
-        'services' => 'Services',
-        'menu' => 'Menu',
-        'pages' => 'Pages',
+        'title' => 'Ресторан',
+        'home' => 'Домашняя',
+        'about' => 'Главная',
+        'contact' => 'Контакты',
+        'login' => 'Вход',
+        'register' => 'Регистрация',
+        'logout' => 'Выход',
+        'services' => 'Сервисы',
+        'menu' => 'Меню',
+        'pages' => 'Страницы',
         'booking' => 'Booking',
-        'team' => 'Our Team',
-        'testimonial' => 'Testimonial',
+        'team' => 'Наша команда',
+        'testimonial' => 'Отзыв',
         'language' => 'Language',
-        'button'=>'Book a table',
-        'profile' => 'Profile',
+        'button'=>'Бронирование',
+        'profile' => 'Профиль',
         'panel'=>'Admin panel',
-        'log'=>'Log'
+        'log'=>'войти'
     ],
     'footer' => [
 

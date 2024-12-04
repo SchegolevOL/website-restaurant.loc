@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\TestimonialController;
 
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,7 +38,14 @@ Route::prefix(\App\Helpers\Langs::getLocale())->middleware('langs')->group(funct
     Route::get('/profile', [\App\Http\Controllers\front\FrontController::class, 'profile'])->name('profile');
 });
 
+Route::get('/{locale}', function (string $locale) {
+    if (! in_array($locale, \App\Helpers\Langs::LOCALE)) {
+        abort(400);
+    }
 
+    App::setLocale($locale);
+
+})->name('setLocale');
 
 
 

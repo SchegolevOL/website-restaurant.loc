@@ -6,7 +6,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb justify-content-center text-uppercase">
                     <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('front.content.login.home')}}</a></li>
-                    <li class="breadcrumb-item"><a href="{{route('register')}}">{{__('front.content.login.register')}}</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('register.loginForm')}}">{{__('front.content.login.register')}}</a></li>
                     <li class="breadcrumb-item text-white active" aria-current="page">{{__('front.content.login.login')}}</li>
                 </ol>
             </nav>

@@ -17,6 +17,7 @@
 
     <!-- Contact Start -->
     <div class="container-xxl py-5">
+        @include('components.messages')
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                 <h5 class="section-title ff-secondary text-center text-primary fw-normal">{{__('front.content.contact.title_1')}}</h5>
@@ -32,31 +33,22 @@
                             frameborder="0" style="min-height: 350px; border:0;" allowfullscreen="" aria-hidden="false"
                             tabindex="0"></iframe>
                 </div>
+                @auth()
                 <div class="col-md-6">
                     <div class="wow fadeInUp" data-wow-delay="0.2s">
-                        <form>
+                        <form method="post" action="{{route('message')}}">
+                            @csrf
                             <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="name" placeholder="{{__('front.content.contact.form.your_name')}}">
-                                        <label for="name">{{__('front.content.contact.form.your_name')}}</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="email" class="form-control" id="email" placeholder="{{__('front.content.contact.form.your_email')}}">
-                                        <label for="email">{{__('front.content.contact.form.your_email')}}</label>
-                                    </div>
-                                </div>
+
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="subject" placeholder="{{__('front.content.contact.form.subject')}}">
+                                        <input name="title" type="text" class="form-control" id="subject" placeholder="{{__('front.content.contact.form.subject')}}">
                                         <label for="subject">{{__('front.content.contact.form.subject')}}</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <textarea class="form-control" placeholder="{{__('front.content.contact.form.message')}}" id="message" style="height: 150px"></textarea>
+                                        <textarea name="message" class="form-control" placeholder="{{__('front.content.contact.form.message')}}" id="message" style="height: 150px"></textarea>
                                         <label for="message">{{__('front.content.contact.form.message')}}</label>
                                     </div>
                                 </div>
@@ -67,6 +59,7 @@
                         </form>
                     </div>
                 </div>
+                @endauth
             </div>
         </div>
     </div>

@@ -36,6 +36,7 @@ Route::prefix(\App\Helpers\Langs::getLocale())->middleware('langs')->group(funct
     Route::get('/logout', [\App\Http\Controllers\user\UserController::class, 'logout'])->name('register.logout');
     Route::post('/booking', [\App\Http\Controllers\front\FrontController::class, 'store'])->name('store');
     Route::get('/profile', [\App\Http\Controllers\front\FrontController::class, 'profile'])->name('profile');
+    Route::post('/contact', [\App\Http\Controllers\front\FrontController::class, 'messageCreate'])->name('message');
 });
 
 Route::get('/{locale}', function (string $locale) {
@@ -44,7 +45,7 @@ Route::get('/{locale}', function (string $locale) {
     }
 
     App::setLocale($locale);
-
+    return redirect()->back()->content();
 })->name('setLocale');
 
 

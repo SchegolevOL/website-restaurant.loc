@@ -55,4 +55,8 @@ class User extends Authenticatable implements MustVerifyEmail
         }
         return asset("/public/{$this->image}");
     }
+    public function testimonials(): HasMany
+    {
+        return $this->hasMany(Testimonial::class);
+    }
 }

@@ -5,7 +5,9 @@ namespace App\Http\Controllers\front;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Chief;
+use App\Models\Testimonial;
 use App\Models\Type;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
@@ -28,8 +30,12 @@ class FrontController extends Controller
     public function testimonial()
     {
         $title = 'testimonial';
+        $testimonials = Testimonial::query()->inRandomOrder()->limit(4)->get();
 
-        return view('front.testimonial', compact('title'));
+        $users=User::query()->select('name', 'image', 'id')->whereIn('id',$testimonials->pluck('user_id'))->get();
+
+//
+        return view('front.testimonial', compact('title', 'testimonials', 'users'));
     }
 
     public function team()
@@ -48,6 +54,7 @@ class FrontController extends Controller
     public function contact()
     {
         $title = 'contact';
+
         return view('front.contact', compact('title'));
     }
 
@@ -98,4 +105,19 @@ class FrontController extends Controller
         $title='Profile';
         return view('user.profile', compact('title'));
     }
+    public function messageCreate(Request $request){
+        $request->validate([
+            'title' => 'required',
+            'message' => 'required',
+        ]);
+        Testimonial::query()->create([
+            'title'=>$request->title,
+            'content'=>$request->message,
+            'user_id'=>auth()->id()
+            ]);
+        return redirect()->back()->with('success', 'Message Created');
+
+    }
+
+
 }

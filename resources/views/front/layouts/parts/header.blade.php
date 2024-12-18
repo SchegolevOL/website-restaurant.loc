@@ -74,9 +74,9 @@
                    class="nav-link dropdown-toggle "
                    data-bs-toggle="dropdown">{{__(app()->getLocale())}}</a>
                 <div class="dropdown-menu m-0">
-                    <a href="{{route('setLocale', 'ru')}}" class="dropdown-item">ru</a>
-                    <a href="{{route('setLocale', 'en')}}" class="dropdown-item">en</a>
-
+                    @foreach(App\Helpers\Langs::LOCALE as $locale)
+                    <a href="{{route('setLocale', $locale)}}" class="dropdown-item">{{$locale}}</a>
+                    @endforeach
                 </div>
             </div>
 

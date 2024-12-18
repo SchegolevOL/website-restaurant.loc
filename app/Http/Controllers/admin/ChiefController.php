@@ -19,7 +19,7 @@ class ChiefController extends Controller
      */
     public function index()
     {
-        $chiefs = Chief::query()->select('slug', 'first_name', 'last_name','patronymic')->paginate(10);
+        $chiefs = Chief::query()->select('slug', 'first_name', 'last_name','patronymic')->paginate(3);
         $title = 'Chiefs';
         return view('admin.chief.index', compact('chiefs', 'title'));
     }

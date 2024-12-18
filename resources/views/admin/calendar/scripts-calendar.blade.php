@@ -38,7 +38,7 @@
                 var eventId = info.event.id;
                 $.ajax({
                     method: 'DELETE',
-                    url: '/admin/bookings/' + eventId,
+                    url: '/admin/booking/' + eventId,
                     success: function (response) {
                         console.log('Event deleted successfully');
                         calendar.refetchEvents();//Refresh Events after deletion
@@ -156,3 +156,4 @@
         downloadLink.click();
     })
 </script>
+

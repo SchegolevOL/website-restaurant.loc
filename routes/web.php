@@ -20,6 +20,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+
+
+
+
 Route::prefix(\App\Helpers\Langs::getLocale())->middleware('langs')->group(function () {
     Route::get('/', [\App\Http\Controllers\front\FrontController::class, 'home'])->name('home');
     Route::get('/booking', [\App\Http\Controllers\front\FrontController::class, 'booking'])->name('booking');
@@ -37,15 +43,42 @@ Route::prefix(\App\Helpers\Langs::getLocale())->middleware('langs')->group(funct
     Route::post('/booking', [\App\Http\Controllers\front\FrontController::class, 'store'])->name('store');
     Route::get('/profile', [\App\Http\Controllers\front\FrontController::class, 'profile'])->name('profile');
     Route::post('/contact', [\App\Http\Controllers\front\FrontController::class, 'messageCreate'])->name('message');
+
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill();
+
+        return redirect()->route('profile');
+    })->middleware(['auth', 'signed'])->name('verification.verify');
+
+    Route::get('verify-email', function () {
+        $title ="verify-email";
+        return view('user.verify-email', compact('title'));
+    })->middleware('auth')->name('verification.notice');
+
+    Route::post('/email/verification-notification', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('message', 'Verification link sent!');
+    })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+
+
 });
 
-Route::get('/{locale}', function (string $locale) {
-    if (! in_array($locale, \App\Helpers\Langs::LOCALE)) {
-        abort(400);
-    }
 
+
+
+Route::get('lang/{locale}', function (string $locale) {
+
+    if (! in_array($locale, \App\Helpers\Langs::LOCALE)) {
+        abort(404);
+    }
     App::setLocale($locale);
-    return redirect()->back()->content();
+
+
+    $url = \App\Helpers\Langs::gerUrl($locale);
+
+        return redirect($url);
 })->name('setLocale');
 
 
@@ -69,21 +102,12 @@ Route::prefix('admin')->group(function (){
         Route::get('/events/search','search');
 
     });
-
-});
-Route::resource('resister', \App\Http\Controllers\admin\RegisterController::class);
-
-Route::get('verify-email', function () {
-    $title ="verify-email";
-    return view('user.verify-email', compact('title'));
-})->middleware('auth')->name('verification.notice');
+    Route::resource('resister', \App\Http\Controllers\admin\RegisterController::class);
+})->middleware(['auth']);
 
 
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
 
-    return redirect()->route('profile');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+
 
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();

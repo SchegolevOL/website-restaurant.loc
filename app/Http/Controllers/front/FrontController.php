@@ -30,7 +30,7 @@ class FrontController extends Controller
     public function testimonial()
     {
         $title = 'testimonial';
-        $testimonials = Testimonial::query()->inRandomOrder()->limit(4)->get();
+        $testimonials = Testimonial::query()->where('status', '=', 1)->inRandomOrder()->limit(4)->get();
 
         $users=User::query()->select('name', 'image', 'id')->whereIn('id',$testimonials->pluck('user_id'))->get();
 

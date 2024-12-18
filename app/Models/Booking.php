@@ -14,7 +14,8 @@ class Booking extends Model
         'email',
         'date_time',
         'number_of_persons',
-        'special_request'
+        'special_request',
+        'status',
     ];
     public function sluggable(): array
     {
@@ -23,5 +24,10 @@ class Booking extends Model
                 'source' => 'name'
             ]
         ];
+    }
+    public function getDateTime($date_time)
+    {
+
+        return date('m/d/Y h:i:s A',strtotime($date_time));
     }
 }

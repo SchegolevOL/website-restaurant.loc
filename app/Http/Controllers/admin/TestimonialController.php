@@ -14,8 +14,9 @@ class TestimonialController extends Controller
     public function index()
     {
         $title="Testimonials";
-        dump(Testimonial::all());
-        return view('admin.testimonial.index', compact('title'));
+        $testimonials=Testimonial::query()->select('title', 'content', 'created_at', 'status', 'slug')->orderByDesc('created_at')->paginate(10);
+
+        return view('admin.testimonial.index', compact('title', 'testimonials'));
     }
 
     /**
@@ -48,9 +49,15 @@ class TestimonialController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $slug)
     {
-        //
+        $testimonial = Testimonial::query()->where('slug', $slug)->firstOrFail();
+        if ($testimonial['status']==0){
+            $testimonial['status']=1;
+            $testimonial->update(['status' => 1]);
+
+        }
+        return redirect()->back();
     }
 
     /**
@@ -72,8 +79,10 @@ class TestimonialController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $slug)
     {
-        //
+        $testimonial=Testimonial::query()->where('slug', $slug)->firstOrFail();
+        $testimonial->delete();
+        return redirect()->route('testimonials.index')->with('success', 'The record has been deleted');
     }
 }

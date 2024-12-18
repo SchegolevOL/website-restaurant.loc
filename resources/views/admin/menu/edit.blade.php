@@ -8,7 +8,7 @@
 @section('content')
     <div class="container">
         @include('components.messages')
-        <form action="{{route('menus.update', ['menu' => $menu->slug])}}" method="post" enctype="multipart/form-data" id="form1" runat="server">
+        <form action="{{route('menus.update', ['menu' => $menu->slug])}}" method="post" enctype="multipart/form-data" id="form1">
             @csrf
             @method('put')
             <div class="card-body">

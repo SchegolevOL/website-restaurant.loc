@@ -64,6 +64,7 @@ class CalendarController extends Controller
                 'title'=>$booking->name,
                 'start'=>$booking->date_time,
                 'end'=>null,
+                'color'=>$booking->status,
             ];
         }
         return $events;

@@ -16,7 +16,7 @@ class MenuController extends Controller
     public function index()
     {
         $title='Menu';
-        $menus = Menu::query()->select('slug', 'title', 'description', 'image', 'price')->paginate();
+        $menus = Menu::query()->select('slug', 'title', 'description', 'image', 'price')->paginate(10);
         return view('admin.menu.index', compact('menus', 'title'));
     }
 

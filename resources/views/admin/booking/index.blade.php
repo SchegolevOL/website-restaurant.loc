@@ -21,8 +21,9 @@
             </thead>
             <tbody>
             @php $i =1; @endphp
+
             @foreach($bookings as $booking)
-                <tr>
+                <tr class="@if($booking->status == 0) bg-gradient-info @endif">
                     <td>{{$i++}}</td>
                     <td>{{$booking->date_time}}</td>
 
@@ -32,18 +33,18 @@
                     <td>{{$booking->special_request}}</td>
 
                     <td class="project-actions text-right">
-                        <a class="btn btn-primary btn-sm float-left" href="{{route('chiefs.show',['chief'=>$booking->slug])}}">
+                        <a class="btn btn-primary btn-sm float-left  " href="{{route('bookings.show',['booking'=>$booking->slug])}}">
                             <i class="fas fa-folder">
                             </i>
-                            View
+                            Confirmation
                         </a>
-                        <a class="btn btn-info btn-sm float-left" href="{{route('chiefs.edit',['chief'=>$booking->slug])}}">
+                        <a class="btn btn-info btn-sm float-left" href="{{route('bookings.edit',['booking'=>$booking->slug])}}">
                             <i class="fas fa-pencil-alt">
                             </i>
                             Edit
                         </a>
                         <form
-                            action="{{ route('chiefs.destroy', ['chief' => $booking->slug]) }}"
+                            action="{{ route('bookings.destroy', ['booking' => $booking->slug]) }}"
                             method="post" class="float-left">
                             @csrf
                             @method('DELETE')
